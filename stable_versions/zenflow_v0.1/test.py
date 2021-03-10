@@ -19,12 +19,15 @@ print(model)
 fc1 = zf.dense_layer(in_dim=2, out_dim=10, activation=zf.relu, initialize='random_uniform')
 model.add_layer(fc1)
 
-fc2 = zf.dense_layer(in_dim=10, out_dim=1, activation=zf.sigmoid, initialize='random_uniform')
+fc2 = zf.dense_layer(in_dim=10, out_dim=15, activation=zf.relu, initialize='random_uniform')
 model.add_layer(fc2)
 
+fc3 = zf.dense_layer(in_dim=15, out_dim=1, activation=zf.sigmoid, initialize='random_uniform')
+model.add_layer(fc3)
+
+model.summary()
+
 print(model.model_loss(X, Y))
-
-
 
 for epoch in range(30):
     model.auto_grad(X, Y)

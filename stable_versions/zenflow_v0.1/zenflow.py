@@ -33,6 +33,29 @@ class sequential:
         self.loss = loss_function
         self.d_loss = derivative_loss[self.loss]
 
+    def summary(self):
+        """summarize the model"""
+        if len(self.layers) == 0:
+            print('Empty model')
+            return
+        print('=====================================================')
+        print('Input dimension: [?, {}]'.format(self.layers[0].W.shape[0]))
+        print('-----------------------------------------------------')
+        n_params = 0
+        for i in range(len(self.layers)):
+            layer = self.layers[i]
+            n_params += layer.W.shape[0] * layer.W.shape[1]
+            print('Dense layer {}'.format(i) + \
+            '\t shape: [{}, {}]'.format(layer.W.shape[0],layer.W.shape[1]) + \
+            '\t activation: ' + layer.activation.__name__
+            )
+        print('-----------------------------------------------------')
+        print('Output dimension: [?, {}]'.format(self.layers[-1].W.shape[1]))
+        print('=====================================================')
+        print('Loss function: ' + self.loss.__name__)
+        print('Number of parameters: {:,}'.format(n_params))
+        print('=====================================================')
+
     def add_layer(self, layer):
         """add a layer to the sequential model"""
         self.layers.append(layer)
@@ -84,6 +107,7 @@ class sequential:
                 skip_last = False
                 continue
             delta = (delta @ W_next.T) * layer.d_activation(layer.XW)
+            W_next = layer.W
             layer.delta = delta
             layer.gradient = layer.X.T @ layer.delta
 
