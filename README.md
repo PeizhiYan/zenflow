@@ -1,6 +1,6 @@
 # ZenFlow v0.1 禅宗流
 
-**ZenFlow** is a Python 3 library for building and training artificial neural networks.
+**ZenFlow** is an open-source Python 3 library for building and training artificial neural networks. The only dependency is Numpy. But in the future, we plan to add the support of Google JAX to enable the use of CUDA GPU.
 
 **From Wikipedia**:
 
