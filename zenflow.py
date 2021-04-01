@@ -134,5 +134,12 @@ class sequential:
         layer.Z = activation(layer.XW) # set layer output
         return layer.Z
 
+    def save(self, fpath):
+        """save layers as a single numpy file"""
+        np.save(fpath, self.layers)
+
+    def load(self, fpath):
+        """load layers from the numpy file"""
+        self.layers = list(np.load(fpath, allow_pickle=True))
 
 
